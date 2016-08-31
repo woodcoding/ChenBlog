@@ -1,0 +1,48 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    {% load blog_paginate %}
+{% paginate articles paginate_num %}
+    {% if articles %}
+        {% for article in articles %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                            {% if article.category %}
+                                <a class="label label-info category" href="{% url 'blog:category' article.category_id %}">
+                                {{ article.category }}
+                                </a>
+                            {% else %}
+                                <a class="label label-info category" href="{% url 'blog:category' 0 %}">
+                                未分类
+                                </a>
+                            {% endif %}
+
+                        <i class="ease"></i>
+                        <a href="{% url 'blog:detail' article.pk %}" class="article-title">{{ article.title }}</a>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="article-info">
+                        <span class="glyphicon glyphicon-time article-icon">  </span> {{ article.time_last_modified|date:"Y-m-d" }}
+                        <span class="glyphicon glyphicon-user article-icon">  </span> {{ article.author.username }}
+                        <span class="glyphicon glyphicon-eye-open article-icon">  </span> {{ article.views }}
+                    </div>
+                    <div class="article">
+                        {{ article.description|safe }}...
+                        <a href="{% url 'blog:detail' article.pk %}" class="pull-right">继续阅读 »</a>
+                    </div>
+                </div>
+                {% if article.tag.all %}
+                    <div class="panel-footer article-footer">
+                        {% for tag in article.tag.all %}
+                            <span class="label label-default">{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-warning" role="alert">还没有发布文章！</div>
+    {% endif %}
+    {% include 'blog/paginate.html' %}
+{% endblock %}

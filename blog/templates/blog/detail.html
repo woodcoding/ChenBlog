@@ -1,0 +1,47 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    {% if article %}
+        <div class="panel panel-default">
+            <div class="panel-heading text-center panel-title">
+                <strong>
+                    {{ article.title }}
+                </strong>
+            </div>
+            <div class="panel-body">
+                <div class="article-info text-center">
+                    <span class="glyphicon glyphicon-bookmark article-icon">  </span>
+                    {% if article.category %}
+                        <a class="category-link" href="{% url 'blog:category' article.category_id %}">{{ article.category }}</a>
+                    {% else %}
+                        <a class="category-link" href="{% url 'blog:category' 0 %}">未分类</a>
+                    {% endif %}
+                    <span class="glyphicon glyphicon-time article-icon">  </span> {{ article.time_last_modified|date:"Y-m-d h:i" }}
+                    <span class="glyphicon glyphicon-user article-icon">  </span> {{ article.author.username }}
+                    <span class="glyphicon glyphicon-eye-open article-icon">  </span> {{ article.views }}
+                </div>
+                <div class="article">
+                    {{ article.body|safe }}
+                    {% if article.tag.all %}
+                        <br><br>
+                        <span class="glyphicon glyphicon-tags"></span>
+                        {% for tag in article.tag.all %}
+                            <a href="{% url 'blog:tag' tag.id %}"><span class="label label-default">{{ tag }}</span>
+                            </a>
+                        {% endfor %}
+                        <br>
+                    {% endif %}
+                    <br>
+                    <div class="alert alert-warning" role="alert">
+                        版权所有,本文作者: <a href="{{ article.author.url }}">{{ article.author.username }}</a><br>
+                        转载请注明出处: <a href="{{ request.scheme }}://{{ request.get_host }}{{ article.get_absolute_url }}">
+                        {{ request.scheme }}://{{ request.get_host }}{{ article.get_absolute_url }}
+                    </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include 'blog/duoshuo.html' %}
+    {% else %}
+        <div class="alert alert-warning" role="alert">文章不存在！</div>
+    {% endif %}
+{% endblock %}

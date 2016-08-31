@@ -1,0 +1,5 @@
+Django==1.8.2
+django-admin-bootstrapped==2.5.7
+django-admin-bootstrapped-plus==0.1.1.2
+django-bootstrap3==7.0.1
+

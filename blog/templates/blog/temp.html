@@ -1,0 +1,7 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    {% if article %}
+    {% else %}
+        <div class="alert alert-warning" role="alert">文章不存在！</div>
+    {% endif %}
+{% endblock %}

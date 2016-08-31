@@ -1,0 +1,41 @@
+<nav>
+    <ul class="pager">
+        {% if articles.has_previous %}
+            <li class="previous"><a href="?query={{ query }}&page={{ articles.previous_page_number }}">上一页</a></li>
+        {% else %}
+            <li class="previous disabled"><a href="#">上一页</a></li>
+        {% endif %}
+    <ul class="pagination">
+        {% if current_page == first_page %}
+            <li class="active"><a href="#">1<span class="sr-only">(current)</span></a></a></li>
+        {% else %}
+            <li><a href="?query={{ query }}&page=1">1</a></li>
+        {% endif %}
+        {% if pages_first > 2 %}
+            <li><a href="#">...</a></li>
+        {% endif %}
+        {% for page in pages %}
+            {% if page == current_page %}
+                <li class="active"><a href="#">{{ page }}<span class="sr-only">(current)</span></a></li>
+            {% else %}
+                <li><a href="?query={{ query }}&page={{ page }}">{{ page }}</a></li>
+            {% endif %}
+        {% endfor %}
+        {% if pages_last < last_page %}
+            <li><a href="#">...</a></li>
+        {% endif %}
+        {% if last_page != 1 %}
+            {% if last_page == current_page %}
+                <li class="active"><a href="#">{{ last_page }}<span class="sr-only">(ggcurrent)</span></a></li>
+            {% else %}
+                <li><a href="?query={{ query }}&page={{ last_page }}">{{ last_page }}</a></li>
+            {% endif %}
+        {% endif %}
+    </ul>
+        {% if articles.has_next %}
+            <li class="next"><a href="?query={{ query }}&page={{ articles.next_page_number }}">下一页</a></li>
+        {% else %}
+            <li class="next disabled"><a href="#">下一页</a></li>
+        {% endif %}
+    </ul>
+</nav>

@@ -1,0 +1,44 @@
+<form method="get" action="{% url 'blog:search' %}">
+    <div class="input-group search-group">
+        <input type="text" name="query" class="form-control" placeholder="搜索一下?">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"> </span> </button>
+      </span>
+    </div><!-- /input-group -->
+</form>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">文章分类</h3>
+    </div>
+    {% if categories %}
+        <ul class="list-group">
+            <a class="list-group-item" href="{% url 'blog:category' 0 %}">
+                    <span class="badge">{{ null_count }}</span>
+                    未分类
+            </a>
+            {% for category in categories %}
+                <a class="list-group-item" href="{% url 'blog:category' category.pk %}">
+                    <span class="badge">{{ category.p_count }}</span>
+                    {{ category }}
+                </a>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="panel-body">没有分类！</div>
+    {% endif %}
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">标签列表</h3>
+    </div>
+    <div class="panel-body">
+        {% if tags %}
+            {% for tag in tags %}
+                <a href="{% url 'blog:tag' tag.pk %}" class="btn btn-default btn-sm tag" role="button">{{ tag }}</a>
+            {% endfor %}
+        {% else %}
+            没有标签！
+        {% endif %}
+    </div>
+</div>
