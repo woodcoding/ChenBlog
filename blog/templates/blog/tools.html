@@ -2,7 +2,7 @@
     <div class="input-group search-group">
         <input type="text" name="query" class="form-control" placeholder="搜索一下?">
       <span class="input-group-btn">
-        <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"> </span> </button>
+        <button class="btn btn-info" type="submit"><span class="glyphicon glyphicon-search"> </span> </button>
       </span>
     </div><!-- /input-group -->
 </form>
@@ -13,10 +13,12 @@
     </div>
     {% if categories %}
         <ul class="list-group">
-            <a class="list-group-item" href="{% url 'blog:category' 0 %}">
+            {% if null_count > 0 %}
+                <a class="list-group-item" href="{% url 'blog:category' 0 %}">
                     <span class="badge">{{ null_count }}</span>
                     未分类
-            </a>
+                </a>
+            {% endif %}
             {% for category in categories %}
                 <a class="list-group-item" href="{% url 'blog:category' category.pk %}">
                     <span class="badge">{{ category.p_count }}</span>

@@ -13,18 +13,24 @@ Django版本：1.8
 `python manage.py migrate`
 ##创建管理员用户
 `python manage.py createsuperuser`
+##配置网站
++ SITE_NAME = 'ChenBlog'  //站点名称
++ SITE_MASTER = 'woodcoding'    //博主
++ SITE_SIGNATURE = '相信爱笑的人运气不会太差！'  //签名
++ SITE_PAGINATE_NUM = 10        //分页数量
++ DUOSHUO_SHORT_NAME = 'blogwodebug'    //多说短名，（请到多说官网申请）
 ##启动网站
 `python manage.py runserver`
 
 #目前具有的功能：
 
-+文章发布功能(Tinymce编辑器)
-+代码高亮（prism）
-+文章评论（多说）
-+分类功能
-+标签功能
-+导航条菜单自定义功能
++ 文章发布功能(Tinymce编辑器)
++ 代码高亮（prism）
++ 文章评论（多说）
++ 分类功能
++ 标签功能
++ 导航条菜单自定义功能
 
 #部分代码实现参考：
-+http://python.usyiyi.cn/django_182/index.html
-+https://github.com/djangoStudyTeam/DjangoBlog/tree/blog-tutorial
++ http://python.usyiyi.cn/django_182/index.html
++ https://github.com/djangoStudyTeam/DjangoBlog/tree/blog-tutorial
