@@ -67,5 +67,8 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'blog/js/prism/prism.js' %}"></script>
+{% if COLORTAG %}
+    <script src="{% static 'blog/js/plugins/colortags.js' %}"></script>
+{% endif %}
 </body>
 </html>

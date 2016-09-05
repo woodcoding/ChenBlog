@@ -13,4 +13,5 @@ def all_context(request):
     SITE_MASTER = settings.SITE_MASTER
     SITE_SIGNATURE = settings.SITE_SIGNATURE
     DUOSHUO_SHORT_NAME = settings.DUOSHUO_SHORT_NAME
+    COLORTAG = settings.COLORTAG
     return locals()

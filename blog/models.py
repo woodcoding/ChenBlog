@@ -53,7 +53,7 @@ class Article(models.Model):
             img = 'sign-error.png'
         elif self.status == 't':
             img = 'sign-warning.png'
-        return '<img src="/static/admin/%s">' % img
+        return '<img src="/static/images/%s">' % img
     status_ico.allow_tags = True
     status_ico.admin_order_field = 'status'
     status_ico.short_description = "状态"
@@ -71,7 +71,7 @@ class Category(models.Model):
     title = models.CharField('标题', max_length=40)
     order = models.IntegerField('排序', default=0)
     description = models.CharField('摘要', max_length=140, blank=True, null=True, default='一个分类')
-    img = models.CharField('图片地址', default='/static/admin/django.png', max_length=240)
+    img = models.CharField('图片地址', default='/static/category/django.png', max_length=240)
     time_create = models.DateTimeField('创建时间', default=timezone.now)
 
     def __str__(self):

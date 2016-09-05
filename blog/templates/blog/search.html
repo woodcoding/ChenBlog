@@ -1,48 +1,10 @@
-{% extends 'blog/base.html' %}
-{% block content %}
+{% extends 'blog/list_base.html' %}
+{% block info %}
     <div class="alert alert-success" role="alert">
             <h3>搜索:“{{ query }}”的结果-共{{ articles.count }}条记录</h3>
     </div>
-    {% load blog_paginate %}
-    {% paginate articles paginate_num %}
-    {% if articles %}
-        {% for article in articles %}
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        <a class="label label-info category">
-                            {% if article.category %}
-                                {{ article.category }}
-                            {% else %}
-                                未分类
-                            {% endif %}
-                        </a>
-                        <i class="ease"></i>
-                        <a href="{% url 'blog:detail' article.pk %}" class="article-title">{{ article.title }}</a>
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <div class="article-info">
-                        <span class="glyphicon glyphicon-time article-icon">  </span> {{ article.time_last_modified|date:"Y-m-d" }}
-                        <span class="glyphicon glyphicon-user article-icon">  </span> {{ article.author.username }}
-                        <span class="glyphicon glyphicon-eye-open article-icon">  </span> {{ article.views }}
-                    </div>
-                    <div class="article">
-                        {{ article.description|safe }}
-                        <a href="{% url 'blog:detail' article.pk %}" class="pull-right">继续阅读 »</a>
-                    </div>
-                </div>
-                {% if article.tag.all %}
-                    <div class="panel-footer article-footer">
-                        {% for tag in article.tag.all %}
-                            <span class="label label-default">{{ tag }}</span>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            </div>
-        {% endfor %}
-    {% else %}
-        <div class="alert alert-warning" role="alert">找不到任何结果！</div>
-    {% endif %}
+{% endblock %}
+{% block paginate %}
     {% include 'blog/paginate_search.html' %}
+    搜索
 {% endblock %}
