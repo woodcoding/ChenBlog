@@ -19,7 +19,7 @@
                     {% else %}
                         <a class="category-link" href="{% url 'blog:category' 0 %}">未分类</a>
                     {% endif %}
-                    <span class="glyphicon glyphicon-time article-icon">  </span> {{ article.time_last_modified|date:"Y-m-d h:i" }}
+                    <span class="glyphicon glyphicon-time article-icon">  </span> {{ article.time_last_modified|date:"Y-m-d H:i" }}
                     <span class="glyphicon glyphicon-user article-icon">  </span> {{ article.author.username }}
                     <span class="glyphicon glyphicon-eye-open article-icon">  </span> {{ article.views }}
                 </div>
