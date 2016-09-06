@@ -1,4 +1,8 @@
 {% extends 'blog/base.html' %}
+{% block title %}
+    {{ title|default:'无标题'}}
+{% endblock %}
+{{ title|default:'无标题'}}
 {% block content %}
     {% if article %}
         <div class="panel panel-default">

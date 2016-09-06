@@ -41,6 +41,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.flatpages',
     'blog',
 )
 
@@ -53,6 +55,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
 
 ROOT_URLCONF = 'chenblog.urls'
@@ -102,7 +105,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-AUTH_USER_MODEL = 'blog.MyUser'
+SITE_ID = 2
 
 # bootstrap admin setting
 DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer'
@@ -131,5 +134,5 @@ SITE_NAME = 'ChenBlog'
 SITE_MASTER = 'woodcoding'
 SITE_SIGNATURE = '相信爱笑的人运气不会太差！'
 SITE_PAGINATE_NUM = 10
-DUOSHUO_SHORT_NAME = 'blogwodebug'
+DUOSHUO_SHORT_NAME = 'chenblogtest'
 COLORTAG = True

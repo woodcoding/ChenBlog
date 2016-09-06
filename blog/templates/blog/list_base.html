@@ -1,4 +1,7 @@
 {% extends 'blog/base.html' %}
+{% block title %}
+    {{ title|default:'无标题'}}
+{% endblock %}
 {% block content %}
     {% block info %}
     {% endblock %}
@@ -46,7 +49,7 @@
             </div>
         {% endfor %}
     {% else %}
-        <div class="alert alert-warning" role="alert">查询无数据！</div>
+        <div class="alert alert-warning" role="alert">什么东东都没有哦！</div>
     {% endif %}
     {% block paginate %}
     {% endblock %}

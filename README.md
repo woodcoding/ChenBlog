@@ -18,7 +18,7 @@ Django版本：1.8
 + SITE_MASTER = 'woodcoding'    //博主
 + SITE_SIGNATURE = '相信爱笑的人运气不会太差！'  //签名
 + SITE_PAGINATE_NUM = 10        //分页数量
-+ DUOSHUO_SHORT_NAME = 'blogwodebug'    //多说短名，（请到多说官网申请）
++ DUOSHUO_SHORT_NAME = 'chenblogtest'    //多说短名，（请到多说官网申请）
 + COLORTAG = False //彩色标签开关，默认关闭，感觉彩色和目前主题不搭如有需要自己开启, 添加css样式tag即可
 
 ## 启动网站

@@ -1,23 +1,12 @@
 from django.db import models
 from django.core.urlresolvers import reverse
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, User
 from django.utils import timezone
 from django.conf import settings
 # Create your models here.
 
 
-class MyUser(AbstractUser):
-    url = models.URLField('网址', default='http://', blank=True)
-
-    class Meta:
-        verbose_name = '用户数据'
-        verbose_name_plural = verbose_name
-        ordering = ['-id']
-
-    def __str__(self):
-        return self.username
-
-
+# 文章模型
 class Article(models.Model):
     STATUS_CHOICES = (
         ('p', '发布'),
@@ -28,7 +17,7 @@ class Article(models.Model):
     body = models.TextField('正文')
     description = models.CharField('摘要', max_length=140, blank=True, null=True,
                                    help_text='可选，为空则自动选取前140个字符')
-    author = models.ForeignKey('MyUser', verbose_name='作者', on_delete=models.CASCADE)
+    author = models.ForeignKey(User, verbose_name='作者', on_delete=models.CASCADE)
     tag = models.ManyToManyField('Tag', verbose_name='标签', blank=True)
     category = models.ForeignKey('Category', verbose_name='分类', blank=True, null=True, on_delete=models.SET_NULL)
     status = models.CharField('状态', max_length=1, choices=STATUS_CHOICES, default='p')
@@ -45,9 +34,11 @@ class Article(models.Model):
         verbose_name_plural = verbose_name
 
     def get_absolute_url(self):
+        """获取文章地址"""
         return reverse('blog:detail', kwargs={'article_id': self.pk})
 
     def status_ico(self):
+        """后台发布状态的图标"""
         img = 'sign-check.png'
         if self.status == 'd':
             img = 'sign-error.png'
@@ -59,14 +50,17 @@ class Article(models.Model):
     status_ico.short_description = "状态"
 
     def save(self,  *args, **kwargs):
+        """文章描述的截取"""
         self.description = self.description or self.body[:140]
         super().save(*args, **kwargs)
 
     def viewed(self):
+        """浏览量加1"""
         self.views += 1
         self.save(update_fields=['views'])
 
 
+# 分类模型
 class Category(models.Model):
     title = models.CharField('标题', max_length=40)
     order = models.IntegerField('排序', default=0)
@@ -83,16 +77,19 @@ class Category(models.Model):
         verbose_name_plural = verbose_name
 
     def img_ico(self):
+        """分类图片"""
         return '<img src="%s" height="40px" width="100">' % self.img
     img_ico.allow_tags = True
     img_ico.admin_order_field = 'img'
     img_ico.short_description = "图片"
 
     def p_count(self):
+        """分类下发布状态的文章数量"""
         count = self.article_set.filter(status='p').count()
         return count
 
 
+# 标签模型
 class Tag(models.Model):
     title = models.CharField('标题', max_length=40)
     order = models.IntegerField('排序', default=0)
@@ -107,6 +104,7 @@ class Tag(models.Model):
         verbose_name_plural = verbose_name
 
 
+# 导航模型
 class Nav(models.Model):
     title = models.CharField('标题', max_length=40)
     url = models.CharField('URL地址', max_length=240)

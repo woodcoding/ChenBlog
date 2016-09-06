@@ -1,0 +1,12 @@
+{% extends 'blog/base_navber.html' %}
+{% block title %}
+    {{ flatpage.title }}
+{% endblock %}
+
+{% block container %}
+    {{ flatpage.content }}
+    {% if flatpage.enable_comments %}
+        <br>
+        {% include 'blog/duoshuo.html' %}
+    {% endif %}
+{% endblock %}

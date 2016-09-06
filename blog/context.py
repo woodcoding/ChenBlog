@@ -4,6 +4,9 @@ from django.conf import settings
 
 # 全局使用参数
 def all_context(request):
+    """
+        传递全局使用的一些数据
+    """
     nav = Nav.objects.filter(is_show=True).order_by('order')
     categories = Category.objects.all().order_by('-order')
     tags = Tag.objects.all().order_by('-order')
