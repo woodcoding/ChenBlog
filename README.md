@@ -32,6 +32,7 @@ Django版本：1.8
 + 分类功能
 + 标签功能
 + 导航条菜单自定义功能
++ 自定义静态页面(v0.2新增)
 
 # 部分代码实现参考：
 + http://python.usyiyi.cn/django_182/index.html
