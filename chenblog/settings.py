@@ -135,4 +135,4 @@ SITE_MASTER = 'woodcoding'
 SITE_SIGNATURE = '相信爱笑的人运气不会太差！'
 SITE_PAGINATE_NUM = 10
 DUOSHUO_SHORT_NAME = 'chenblogtest'
-COLORTAG = True
+COLORTAG = False
