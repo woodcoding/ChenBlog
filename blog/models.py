@@ -59,6 +59,30 @@ class Article(models.Model):
         self.views += 1
         self.save(update_fields=['views'])
 
+    def get_previous_article(self):
+        """获取上一篇文章"""
+        all_item = Article.objects.filter(status='p').order_by('id')
+        index = 0
+        for x in all_item:
+            if x.id == self.id:
+                break
+            else:
+                index += 1
+        if index:
+            return all_item[index-1]
+
+    def get_next_article(self):
+        """获取下一篇文章"""
+        all_item = Article.objects.filter(status='p').order_by('-id')
+        index = 0
+        for x in all_item:
+            if x.id == self.id:
+                break
+            else:
+                index += 1
+        if index:
+            return all_item[index-1]
+
 
 # 分类模型
 class Category(models.Model):

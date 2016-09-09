@@ -1,0 +1,13 @@
+﻿{% extends 'blog/base.html' %}
+{% block container %}
+    <div id="container">
+        <div class="row container-all">
+            <div class="col-sm-8 container-left">
+                {% block content %}内容区{% endblock %}
+            </div>
+            <div class="col-sm-4 container-right">
+                {% include 'blog/tools.html' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

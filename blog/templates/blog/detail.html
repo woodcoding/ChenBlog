@@ -1,8 +1,8 @@
-{% extends 'blog/base.html' %}
+{% extends 'blog/base_container.html' %}
 {% block title %}
-    {{ title|default:'无标题'}}
+    {{ title|default:'无标题' }}
 {% endblock %}
-{{ title|default:'无标题'}}
+{{ title|default:'无标题' }}
 {% block content %}
     {% if article %}
         <div class="panel panel-default">
@@ -15,7 +15,8 @@
                 <div class="article-info text-center">
                     <span class="glyphicon glyphicon-bookmark article-icon">  </span>
                     {% if article.category %}
-                        <a class="category-link" href="{% url 'blog:category' article.category_id %}">{{ article.category }}</a>
+                        <a class="category-link"
+                           href="{% url 'blog:category' article.category_id %}">{{ article.category }}</a>
                     {% else %}
                         <a class="category-link" href="{% url 'blog:category' 0 %}">未分类</a>
                     {% endif %}
@@ -44,6 +45,20 @@
                 </div>
             </div>
         </div>
+        <nav>
+            <ul class="pager">
+                {% if article.get_previous_article %}
+                    {% with article.get_previous_article as previous %}
+                    <li class="previous"><a href="{{ previous.get_absolute_url }}">上一篇:{{ previous.title|truncatechars:20 }}</a></li>
+                    {% endwith %}
+                {% endif %}
+                {% if article.get_next_article %}
+                    {% with article.get_next_article as next %}
+                    <li class="next"><a href="{{ next.get_absolute_url }}">下一篇:{{ next.title|truncatechars:20 }}</a></li>
+                    {% endwith %}
+                {% endif %}
+            </ul>
+        </nav>
         {% include 'blog/duoshuo.html' %}
     {% else %}
         <div class="alert alert-warning" role="alert">文章不存在！</div>
