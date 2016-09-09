@@ -1,5 +1,5 @@
 from django.contrib import admin, messages
-from blog.models import Article, Category, Tag, Nav
+from blog.models import Article, Category, Tag, Nav, Link
 # Register your models here.
 
 
@@ -92,7 +92,19 @@ class NavAdmin(admin.ModelAdmin):
     )
 
 
+# 友情链接模型定制
+class LinkAdmin(admin.ModelAdmin):
+    list_display = ('title', 'order', 'url', 'views', 'is_show')
+
+    fieldsets = (
+        ('基本设置', {
+            'fields': ('title', 'description', 'url', 'order', 'is_show')
+        }),
+    )
+
+
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Nav, NavAdmin)
+admin.site.register(Link, LinkAdmin)

@@ -44,30 +44,47 @@
         {% endif %}
     </div>
 </div>
+{% if FRIENDLINK %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">友情链接</h3>
+        </div>
+        <div class="panel-body">
+            {% if links %}
+                {% for link in links %}
+                    <a href="{% url 'blog:link' %}?link={{ link.pk }}" class="btn btn-default btn-sm tag" role="button">{{ link }}</a>
+                {% endfor %}
+            {% else %}
+                没有链接！
+            {% endif %}
+        </div>
+    </div>
+{% endif %}
 {% if DUOSHUO_NEW_COMMENTS %}
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title">最新评论</h3>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">最新评论</h3>
+        </div>
+        <div class="panel-body">
+            <!-- 多说最新评论 start -->
+            <div class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="1"
+                 data-show-title="1"
+                 data-show-admin="1" data-excerpt-length="70"></div>
+            <!-- 多说最新评论 end -->
+            <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+            <script type="text/javascript">
+                var duoshuoQuery = {short_name: "wodebugchenblog"};
+                (function () {
+                    var ds = document.createElement('script');
+                    ds.type = 'text/javascript';
+                    ds.async = true;
+                    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                    ds.charset = 'UTF-8';
+                    (document.getElementsByTagName('head')[0]
+                    || document.getElementsByTagName('body')[0]).appendChild(ds);
+                })();
+            </script>
+            <!-- 多说公共JS代码 end -->
+        </div>
     </div>
-    <div class="panel-body">
-        <!-- 多说最新评论 start -->
-        <div class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="1" data-show-title="1"
-             data-show-admin="1" data-excerpt-length="70"></div>
-        <!-- 多说最新评论 end -->
-        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-        <script type="text/javascript">
-            var duoshuoQuery = {short_name: "wodebugchenblog"};
-            (function () {
-                var ds = document.createElement('script');
-                ds.type = 'text/javascript';
-                ds.async = true;
-                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-                ds.charset = 'UTF-8';
-                (document.getElementsByTagName('head')[0]
-                || document.getElementsByTagName('body')[0]).appendChild(ds);
-            })();
-        </script>
-        <!-- 多说公共JS代码 end -->
-    </div>
-</div>
 {% endif %}

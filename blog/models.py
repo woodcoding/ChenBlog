@@ -143,3 +143,27 @@ class Nav(models.Model):
         ordering = ['-time_create']
         verbose_name = '导航数据'
         verbose_name_plural = verbose_name
+
+
+class Link(models.Model):
+    title = models.CharField('网站标题', max_length=100)
+    url = models.URLField('网站链接', default='http://')
+    description = models.CharField('网站描述', max_length=240, help_text='网站描述，240字以内', blank=True)
+    order = models.PositiveIntegerField('排序', default=0)
+    time_create = models.DateTimeField('创建时间', default=timezone.now)
+    views = models.PositiveIntegerField('访问次数', default=0)
+    is_show = models.BooleanField('显示', default=True, help_text='选择是否在菜单显示，默认显示')
+
+    def __str__(self):
+        return self.title
+
+    def viewed(self):
+        """浏览量加1"""
+        self.views += 1
+        self.save(update_fields=['views'])
+
+    class Meta:
+        ordering = ['-time_create']
+        verbose_name = '友情链接'
+        verbose_name_plural = verbose_name
+

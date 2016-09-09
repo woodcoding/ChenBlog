@@ -2,8 +2,10 @@ from django.shortcuts import render
 from django.db.models import Q
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from blog.models import Article, Category, Tag
+from django.views.generic import View
+from blog.models import Article, Category, Tag, Link
 from django.conf import settings
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 
@@ -94,3 +96,16 @@ class ArticleDetailView(DetailView):
     def get_context_data(self, **kwargs):
         kwargs['title'] = super(ArticleDetailView, self).get_object().title
         return super(ArticleDetailView, self).get_context_data(**kwargs)
+
+
+class LinkView(View):
+    def get(self, *args, **kwargs):
+        url = '/'
+        link_id = self.request.GET.get('link', 0)
+        try:
+                    obj = Link.objects.filter(id=link_id)[0]
+                    obj.viewed()
+                    url = obj.url
+        except Exception:
+            pass
+        return HttpResponseRedirect(url)
