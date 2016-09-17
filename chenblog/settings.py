@@ -105,6 +105,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+# web other settings
+
 SITE_ID = 2
 
 # bootstrap admin setting
@@ -126,7 +128,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'common_static'),
                     )
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # web templates setting

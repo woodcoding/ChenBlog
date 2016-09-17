@@ -92,3 +92,4 @@ ENV/
 .idea/
 chenblog.sqlite3
 blog/migrations/
+media/

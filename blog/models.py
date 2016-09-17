@@ -89,7 +89,8 @@ class Category(models.Model):
     title = models.CharField('标题', max_length=40)
     order = models.IntegerField('排序', default=0)
     description = models.CharField('摘要', max_length=140, blank=True, null=True, default='一个分类')
-    img = models.CharField('图片地址', default='/static/category/django.png', max_length=240)
+    #img = models.CharField('图片地址', default='/static/category/django.png', max_length=240)
+    img = models.ImageField('图片', upload_to='category/img/%Y/%m', max_length=240, )
     time_create = models.DateTimeField('创建时间', default=timezone.now)
 
     def __str__(self):
@@ -102,7 +103,7 @@ class Category(models.Model):
 
     def img_ico(self):
         """分类图片"""
-        return '<img src="%s" height="40px" width="100">' % self.img
+        return '<img src="/blog/media/%s" height="40px" width="100">' % self.img
     img_ico.allow_tags = True
     img_ico.admin_order_field = 'img'
     img_ico.short_description = "图片"
@@ -152,7 +153,7 @@ class Link(models.Model):
     order = models.PositiveIntegerField('排序', default=0)
     time_create = models.DateTimeField('创建时间', default=timezone.now)
     views = models.PositiveIntegerField('访问次数', default=0)
-    is_show = models.BooleanField('显示', default=True, help_text='选择是否在菜单显示，默认显示')
+    is_show = models.BooleanField('显示', default=True, help_text='选择是否显示，默认显示')
 
     def __str__(self):
         return self.title
