@@ -35,6 +35,7 @@ INSTALLED_APPS = (
     'bootstrap3',
     'admin_bootstrapped_plus',
     'django_admin_bootstrapped',
+    'pagedown',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -124,8 +125,8 @@ MESSAGE_TAGS = {
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'common_static'),
-                    )
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),
+#                     )
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -140,3 +141,4 @@ DUOSHUO_SHORT_NAME = 'chenblogtest'
 DUOSHUO_NEW_COMMENTS = True
 COLORTAG = False
 FRIENDLINK = True
+MARKDOWN = False

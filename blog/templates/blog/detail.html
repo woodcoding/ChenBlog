@@ -48,12 +48,15 @@
             <ul class="pager">
                 {% if article.get_previous_article %}
                     {% with article.get_previous_article as previous %}
-                    <li class="previous"><a href="{{ previous.get_absolute_url }}">上一篇:{{ previous.title|truncatechars:20 }}</a></li>
+                        <li class="previous"><a
+                                href="{{ previous.get_absolute_url }}">上一篇:{{ previous.title|truncatechars:20 }}</a>
+                        </li>
                     {% endwith %}
                 {% endif %}
                 {% if article.get_next_article %}
                     {% with article.get_next_article as next %}
-                    <li class="next"><a href="{{ next.get_absolute_url }}">下一篇:{{ next.title|truncatechars:20 }}</a></li>
+                        <li class="next"><a href="{{ next.get_absolute_url }}">下一篇:{{ next.title|truncatechars:20 }}</a>
+                        </li>
                     {% endwith %}
                 {% endif %}
             </ul>

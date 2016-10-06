@@ -21,6 +21,8 @@ Django版本：1.8
 + DUOSHUO_SHORT_NAME = 'chenblogtest'    //多说短名，（请到多说官网申请）
 + DUOSHUO_NEW_COMMENTS = True       //最新评论是否显示，默认显示
 + COLORTAG = False //彩色标签开关，默认关闭，感觉彩色和目前主题不搭如有需要自己开启, 添加css样式tag即可
++ FRIENDLINK = True     //友情链接是否显示
++ MARKDOWN = False      //是否开启MarkDown
 
 ## 启动网站
 `python manage.py runserver`
@@ -28,13 +30,14 @@ Django版本：1.8
 # 目前具有的功能：
 
 + 文章发布功能(Tinymce编辑器)
-+ 代码高亮（prism）
++ 代码高亮（prism or pyments）
 + 文章评论（多说）
 + 分类功能
 + 标签功能
 + 导航条菜单自定义功能
 + 自定义静态页面(v0.2新增，模板文件见下方)
 + 友情链接功能
++ Markdown编辑功能
 
 ## 自定义静态页面的模板文件解释：
 * 请在增加静态页面的时候URL路径前面添加‘pages’目录，例如：/pages/about/（防止出现混乱）

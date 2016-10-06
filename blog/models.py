@@ -3,6 +3,8 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import AbstractUser, User
 from django.utils import timezone
 from django.conf import settings
+
+
 # Create your models here.
 
 
@@ -14,7 +16,8 @@ class Article(models.Model):
         ('d', '删除'),
     )
     title = models.CharField('标题', max_length=100)
-    body = models.TextField('正文')
+    body = models.TextField('文章显示')
+    text = models.TextField('原文', default='')
     description = models.CharField('摘要', max_length=140, blank=True, null=True,
                                    help_text='可选，为空则自动选取前140个字符')
     author = models.ForeignKey(User, verbose_name='作者', on_delete=models.CASCADE)
@@ -45,14 +48,15 @@ class Article(models.Model):
         elif self.status == 't':
             img = 'sign-warning.png'
         return '<img src="/static/images/%s">' % img
+
     status_ico.allow_tags = True
     status_ico.admin_order_field = 'status'
     status_ico.short_description = "状态"
 
-    def save(self,  *args, **kwargs):
-        """文章描述的截取"""
-        self.description = self.description or self.body[:140]
-        super().save(*args, **kwargs)
+    # def save(self,  *args, **kwargs):
+    #     """文章描述的截取"""
+    #     self.description = self.description or self.body[:140]
+    #     super().save(*args, **kwargs)
 
     def viewed(self):
         """浏览量加1"""
@@ -69,7 +73,7 @@ class Article(models.Model):
             else:
                 index += 1
         if index:
-            return all_item[index-1]
+            return all_item[index - 1]
 
     def get_next_article(self):
         """获取下一篇文章"""
@@ -81,7 +85,7 @@ class Article(models.Model):
             else:
                 index += 1
         if index:
-            return all_item[index-1]
+            return all_item[index - 1]
 
 
 # 分类模型
@@ -89,7 +93,7 @@ class Category(models.Model):
     title = models.CharField('标题', max_length=40)
     order = models.IntegerField('排序', default=0)
     description = models.CharField('摘要', max_length=140, blank=True, null=True, default='一个分类')
-    #img = models.CharField('图片地址', default='/static/category/django.png', max_length=240)
+    # img = models.CharField('图片地址', default='/static/category/django.png', max_length=240)
     img = models.ImageField('图片', upload_to='category/img/%Y/%m', max_length=240, )
     time_create = models.DateTimeField('创建时间', default=timezone.now)
 
@@ -104,6 +108,7 @@ class Category(models.Model):
     def img_ico(self):
         """分类图片"""
         return '<img src="/blog/media/%s" height="40px" width="100">' % self.img
+
     img_ico.allow_tags = True
     img_ico.admin_order_field = 'img'
     img_ico.short_description = "图片"
@@ -167,4 +172,3 @@ class Link(models.Model):
         ordering = ['-time_create']
         verbose_name = '友情链接'
         verbose_name_plural = verbose_name
-

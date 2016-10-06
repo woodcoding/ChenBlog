@@ -1,6 +1,6 @@
 {% extends 'blog/base_container.html' %}
 {% block title %}
-    {{ title|default:'无标题'}}
+    {{ title|default:'无标题' }}
 {% endblock %}
 {% block content %}
     {% block info %}
@@ -12,15 +12,15 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                            {% if article.category %}
-                                <a class="label label-info category" href="{% url 'blog:category' article.category_id %}">
+                        {% if article.category %}
+                            <a class="label label-info category" href="{% url 'blog:category' article.category_id %}">
                                 {{ article.category }}
-                                </a>
-                            {% else %}
-                                <a class="label label-info category" href="{% url 'blog:category' 0 %}">
+                            </a>
+                        {% else %}
+                            <a class="label label-info category" href="{% url 'blog:category' 0 %}">
                                 未分类
-                                </a>
-                            {% endif %}
+                            </a>
+                        {% endif %}
 
                         <i class="ease"></i>
                         <a href="{% url 'blog:detail' article.pk %}" class="article-title">{{ article.title }}</a>
@@ -33,7 +33,7 @@
                         <span class="glyphicon glyphicon-eye-open article-icon">  </span> {{ article.views }}
                     </div>
                     <div class="article">
-                        {{ article.description|safe }}...
+                        {{ article.description|striptags|safe|truncatechars:140|linebreaks }}...
                         <a href="{% url 'blog:detail' article.pk %}" class="pull-right">继续阅读 »</a>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                     <div class="panel-footer article-footer">
                         {% for tag in article.tag.all %}
                             <a href="{% url 'blog:tag' tag.id %}">
-                            <span class="label label-default">{{ tag }}</span>
+                                <span class="label label-default">{{ tag }}</span>
                             </a>
                         {% endfor %}
                     </div>
