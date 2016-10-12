@@ -19,7 +19,7 @@ word-wrap: break-word;
     word-wrap: break-word;
 }
 .label{border-radius: 0;}
-.panel-title>.label{padding: .4em .6em .3em;}
+.panel-title>.label{padding: .4em .6em .3em; }
 .jumbotron{
     padding-bottom: 0 !important;
     padding-top: 20px !important;
@@ -40,6 +40,9 @@ word-wrap: break-word;
     border-left:4px solid #5bc0de;
     border-top:4px solid transparent;
     border-bottom:4px solid transparent;
+}
+.panel-title{
+    line-height: 25px;
 }
 .panel-title>a.category{
     color: white;
